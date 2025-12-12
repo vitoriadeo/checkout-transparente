@@ -18,7 +18,7 @@ def inicializa_db():
 
         logger.info("Lendo arquivo schema.sql...")
 
-        caminho = os.path.join(os.patch.dirname(__file__), 'schema.sql')
+        caminho = os.path.join(os.path.dirname(__file__), 'schema.sql')
 
         with open(caminho, 'r', encoding='utf-8') as arquivo:
             sql_comandos = arquivo.read()
@@ -47,3 +47,6 @@ def inicializa_db():
         if conn:
             conn.close()
             logger.info("Conexão fechada.")
+
+if __name__ == "__main__":
+    inicializa_db()
