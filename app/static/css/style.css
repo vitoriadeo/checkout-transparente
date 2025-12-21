@@ -27,6 +27,15 @@ b {
     color: #3f2c1f;
 }
 
+blockquote {
+    background-color: #83a7622f;
+    width: 100%;
+    margin: 15px 0;
+    border-radius: 3px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
 h1 {
     font-family: "Macondo Swash Caps", cursive;
     font-weight: normal;
@@ -47,6 +56,14 @@ h2 {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.cart-img {
+    width: 50px;
+    display: inline;
+    margin-left: auto;
+    margin-right: 10px;
+    vertical-align: middle;
 }
 
 .button {
@@ -160,22 +177,32 @@ h2 {
 }
 
 .valorxquantidade {
-    display: flex;           /* Coloca um ao lado do outro */
-    align-items: center;     /* Alinha o centro verticalmente (para o número não ficar torto) */
-    gap: 15px;               /* Cria um espaço vazio entre o preço e a caixinha */
-    margin-bottom: 1rem;     /* Um respiro antes do botão de comprar */
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 1rem;
 }
 
-/* Dica extra de estilo para o input combinar com o tema */
 .input-qtd {
-    width: 60px;             /* Para não ficar muito largo */
-    height: 40px;            /* Altura confortável para o dedo (mobile) */
-    font-family: 'PixelOperator', sans-serif; /* Ou a sua fonte escolhida */
+    width: 60px;
+    height: 40px;
     font-size: 1.2rem;
     text-align: center;
-    border: 2px solid #3e2723; /* Borda marrom estilo terra */
+    border: 2px solid #3e2723;
     border-radius: 4px;
-    background-color: #fff8e1; /* Fundo meio pergaminho */
+    background-color: #fff8e1;
+}
+
+.form-text {
+    display: block;
+    margin-bottom: 15px;
+    width: 50%;
+    padding: 8px;
+    border: none;
+    background: #64776527;
+    border-radius: 3px;
+    border: 1px solid #6477659a;
+
 }
 
 @media (min-width: 600px) {

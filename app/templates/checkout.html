@@ -2,5 +2,30 @@
 {% block title %} {{super()}} - Pagamento {% endblock %}
 
 {% block content %}
-<p>conteudo</p>
+<blockquote>
+    <img class="cart-img" src="{{url_for('static', filename='img/shopping-cart.png')}}"> <span>Você está comprando
+        tantos repolhos por R$ 45,00.</span>
+</blockquote>
+<form>
+    <div class="input-box">
+        <label for="name">Nome completo</label>
+        <input type="text" id="name" name="name" class="form-text">
+    </div>
+
+    <div class="input-box">
+        <label for="email">Endereço de e-mail</label>
+        <input type="text" id="email" name="email" class="form-text">
+    </div>
+    
+    <div class="input-box">
+        <label for="id">CPF ou CNPJ</label>
+        <input type="text" id="id" name="id" class="form-text">
+    </div>
+
+    <div class="input-box">
+        <label for="postal">CEP</label>
+        <input type="text" id="postal" name="postal" class="form-text">
+    </div>
+
+</form>
 {% endblock %}

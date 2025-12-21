@@ -8,10 +8,19 @@
         Cuidadosamente
         cultivados e transportados com muito esforço. Compre um e apoie um comerciante local!</p>
     <div class="valorxquantidade">
-        <p class="valor">R$ 2,29</p>
-        <input type="number" id="quantidade" class="input-qtd" name="quantidade" min="1" max="1000" value="1" step="1">
-        <span class="minibutton-2">unidade</span></div>
-            <button class="button">Compre agora</button>
+        <form action="/add-cart" method="post">
+
+            <p class="valor">R$ 2,29</p>
+            <input type="hidden" name="preco" value="2.29">
+
+            <input type="number" id="quantidade" class="input-qtd" name="quantidade" min="1" max="1000" value="1"
+                step="1">
+            <span class="minibutton-2">unidade</span>
+
+            <button type="submit" class="button">Compre agora</button>
+        </form>
+    </div>
+
 </section>
 
 {% endblock %}
