@@ -19,6 +19,12 @@ def add_cart():
     return redirect(url_for("main.checkout"))
 
 
+@section.route("/clear-cart", methods=["POST"])
+def clear_cart():
+    session.clear()
+    flash("Sua cesta de compras está vazia", "success")
+    return redirect(url_for("main.product"))
+
 # @section.route("/pay", method=['POST'])
 # def pay():
 #     return
@@ -26,8 +32,8 @@ def add_cart():
 
 @section.route("/checkout")  # página /get
 def checkout():
-    if 'preco' not in session:
-        return redirect(url_for('main.product'))
+    # if 'preco' not in session:
+    # return redirect(url_for('main.product'))
     return render_template("checkout.html")
 
 

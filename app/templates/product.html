@@ -21,6 +21,22 @@
         </form>
     </div>
 
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="{{category}}"> <p>
+        {% if category == 'success' %}
+        FEEDBACK
+        {% elif category == 'error' %}
+        FEEDBACK ERROR
+        {% endif %}
+        {{message}}
+        </p>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
 </section>
 
 {% endblock %}
