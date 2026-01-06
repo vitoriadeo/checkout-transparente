@@ -24,7 +24,7 @@ a {
 }
 
 b {
-    color: #3f2c1f;
+    color: #43641d;
 }
 
 blockquote {
@@ -59,10 +59,10 @@ h2 {
 }
 
 .cart-img {
-    width: 50px;
-    display: inline;
-    margin-left: auto;
-    margin-right: 10px;
+width: 50px;
+    display: inline-block; /* Melhor que inline para controlar margens */
+    margin-left: 0;        /* Garante que a imagem encoste na esquerda */
+    margin-right: 10px;    /* Espaço entre a imagem e o título */
     vertical-align: middle;
 }
 
@@ -202,7 +202,16 @@ h2 {
     background: #64776527;
     border-radius: 3px;
     border: 1px solid #6477659a;
+}
 
+.summary-title {
+    display: inline;
+    vertical-align: top;
+    margin: 0;
+}
+
+.summary-txt {
+    margin: -15px 0 0 65px;
 }
 
 @media (min-width: 600px) {
