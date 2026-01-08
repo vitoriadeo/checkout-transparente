@@ -1,5 +1,6 @@
 argcomplete==3.6.3
 blinker==1.9.0
+cachelib==0.13.0
 charset-normalizer==3.4.4
 click==8.3.0
 colorama==0.4.6
@@ -7,12 +8,14 @@ commitizen==4.9.1
 decli==0.6.3
 Deprecated==1.2.18
 Flask==3.1.2
+Flask-Session==0.8.0
 greenlet==3.2.4
 gunicorn==23.0.0
 iniconfig==2.3.0
 itsdangerous==2.2.0
 Jinja2==3.1.6
 MarkupSafe==3.0.3
+msgspec==0.20.0
 packaging==25.0
 pluggy==1.6.0
 prompt_toolkit==3.0.51

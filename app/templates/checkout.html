@@ -3,10 +3,29 @@
 
 {% block content %}
 <blockquote>
-    <img class="cart-img" src="{{url_for('static', filename='img/shopping-cart.png')}}"> <span>Você está comprando
-        tantos repolhos por R$ 45,00.</span>
+    <img class="cart-img" src="{{url_for('static', filename='img/shopping-cart.png')}}">
+    <h2 class="summary-title">Resumo do pedido</h2>
+    <div class="summary-txt">Você está comprando <b>{{session['quantidade']}}</b>
+        {% if session['quantidade']|int > 1 %}
+        <b>repolhos</b>
+        {% else %}
+        <b>repolho</b>
+        {% endif %}
+        por <b>R$ {{ (session['preco']|float *
+            session['quantidade']|int)|round(2) }}</b><br>
+        <div class="botoes-carrinho">
+            <form action="/clear-cart" method="POST">
+                <button>Limpar carrinho</button>
+            </form>
+
+            <form action="/product" method="GET">
+                <button>Editar carrinho</button>
+            </form>
+        </div>
+    </div>
 </blockquote>
-<form>
+
+<form class="pay-form">
     <div class="input-box">
         <label for="name">Nome completo</label>
         <input type="text" id="name" name="name" class="form-text">
@@ -16,7 +35,7 @@
         <label for="email">Endereço de e-mail</label>
         <input type="text" id="email" name="email" class="form-text">
     </div>
-    
+
     <div class="input-box">
         <label for="id">CPF ou CNPJ</label>
         <input type="text" id="id" name="id" class="form-text">
@@ -26,6 +45,5 @@
         <label for="postal">CEP</label>
         <input type="text" id="postal" name="postal" class="form-text">
     </div>
-
 </form>
 {% endblock %}

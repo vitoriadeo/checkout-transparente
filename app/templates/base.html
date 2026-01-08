@@ -18,11 +18,31 @@
 
 <body>
     <header id="header">
-        <h1>Repolhos do Reino da Terra</h1>
-        <h2>Os melhores de Omashu e Ba Sing Se!</h2>
+        <h1>Cabbage Corp</h1>
+        <h2>Os melhores repolhos de Omashu e Ba Sing Se!</h2>
+        <nav class="menu">
+            <a href="/product">Página inicial</a>
+        </nav>
     </header>
     <main id="main">
         {% block content %}{% endblock %}
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="{{category}}">
+            <p>
+                {% if category == 'info' %}
+                ⚠️
+                {% elif category == 'error' %}
+                ❌
+                {% endif %}
+                {{message}}
+            </p>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
     </main>
 
     <footer id="footer">
@@ -39,13 +59,16 @@
                 real. Sinta-se à
                 vontade para clicar em <span class="minibutton">Compre agora</span> e simular o fluxo completo.
                 <br><br>
-                <span class="minibutton-2">Dica</span>: Para testar sem custos, utilize dados fictícios de cartão de crédito, cadastro (como CPFs)
+                <span class="minibutton-2">Dica</span>: Para testar sem custos, utilize dados fictícios de cartão de
+                crédito, cadastro (como CPFs)
                 e endereços (como os gerados pelo
                 site <a href="https://www.4devs.com.br/" target="_blank">4Devs</a>).
             </p>
         </div>
         <small>Crédito imagem <a href="https://pt.vecteezy.com/"> PNGs por Vecteezy</a></small>
     </footer>
+    <img class="cab" src="{{url_for('static', filename='img/gen_image.png')}}">
+
 </body>
 
 </html>
