@@ -32,13 +32,14 @@ h1 {
     font-weight: normal;
     font-size: 2.5rem;
     text-align: center;
-    color: rgb(195, 209, 190);
+    color: rgb(230, 230, 230);
     text-shadow: #64776596 1px 0 5px;
     margin-bottom: -5px;
     background-color: #647765c5;
     border-radius: 50px;
     padding: 8px 15px;
     display: inline-block;
+    border: 1px solid #000000b2;
 }
 
 h2 {
@@ -114,6 +115,7 @@ h2 {
     border-radius: 5px;
     box-sizing: border-box;
     border: 1px solid #6477659a;
+    max-width: 1200px;
 }
 
 #footer,
@@ -121,6 +123,7 @@ h2 {
     width: 80%;
     margin: 20px auto;
     text-align: center;
+    max-width: 1200px;
 }
 
 .menu {
@@ -201,7 +204,6 @@ h2 {
 .valorxquantidade form {
     display: flex;
     gap: 15px;
-    margin-bottom: 1.7rem;
     min-height: 44px;
 }
 
@@ -261,6 +263,15 @@ h2 {
 
 @media (min-width: 600px) {
 
+    #main,
+    #footer,
+    #header,
+    .menu {
+        width: 40%;
+        min-width: 500px;
+    }
+
+
     .repolho-img {
         float: left;
         width: 150px;
@@ -302,7 +313,7 @@ h2 {
     }
 
     .valor {
-        font-size: 2rem;
+        font-size: 1.7rem;
         height: 44px;
     }
 
