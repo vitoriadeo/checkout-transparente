@@ -28,13 +28,17 @@ blockquote {
 }
 
 h1 {
-    font-family: '161 Vergilius';
+    font-family: 'Macondo Swash Caps';
     font-weight: normal;
-    font-size: 3rem;
+    font-size: 2.5rem;
     text-align: center;
-    color: rgb(85, 61, 38);
+    color: rgb(195, 209, 190);
     text-shadow: #64776596 1px 0 5px;
     margin-bottom: -5px;
+    background-color: #647765c5;
+    border-radius: 50px;
+    padding: 8px 15px;
+    display: inline-block;
 }
 
 h2 {
@@ -64,14 +68,15 @@ h2 {
 .button {
     background-color: rgb(124, 82, 58);
     border: none;
-    padding: 10px 10px;
+    padding: 5px 10px;
     color: rgb(253, 255, 240);
     margin-bottom: 20px;
     border-radius: 2px;
-    font-size: 1.2rem;
+    font-size: 1.0rem;
     width: 100%;
     text-transform: uppercase;
     font-family: 'Alegreya';
+    flex-wrap: nowrap;
 }
 
 .descricao {
@@ -115,7 +120,7 @@ h2 {
 #header {
     width: 80%;
     margin: 20px auto;
-    text-align: right;
+    text-align: center;
 }
 
 .menu {
@@ -182,24 +187,13 @@ h2 {
     padding: 5px 8px;
 }
 
-.cab {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    width: 300px;
-    z-index: 1000;
-    -webkit-user-drag: none; /* Safari/Chrome */
-    user-select: none;
-    pointer-events: none;
-}
-
 .valor {
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin: 0;
     background-color: #3e3b2363;
     padding: 0 8px;
     border-radius: 3px;
-    color: #fff8e1;
+    color: #4b442f;
     width: 100px;
     display: flex;
 }
@@ -208,7 +202,7 @@ h2 {
     display: flex;
     gap: 15px;
     margin-bottom: 1.7rem;
-    height: 44px;
+    min-height: 44px;
 }
 
 .input-qtd {
@@ -237,6 +231,8 @@ h2 {
     display: inline;
     vertical-align: top;
     margin: 0;
+    font-size: 1.2rem;
+    border-bottom: 1px solid #6faa3f;
 }
 
 .summary-txt {
@@ -248,21 +244,66 @@ h2 {
     box-sizing: border-box;
 }
 
+.pay-form .readonly input {
+    background-color: #c5c1b2;
+}
+
+.cab {
+    bottom: 20px;
+    padding-left: 20px;
+    width: 80%;
+    z-index: -1000;
+    -webkit-user-drag: none;
+    /* Safari/Chrome */
+    user-select: none;
+    pointer-events: none;
+}
+
 @media (min-width: 600px) {
+
     .repolho-img {
         float: left;
         width: 150px;
         margin-right: 15px;
     }
 
-    #main,
-    #footer,
-    #header {
-        width: 40%;
-    }
-
     .button {
         width: 200px;
         height: 44px;
     }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px 20px;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    .input-box-grid {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .cab {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        width: 300px;
+        z-index: -1000;
+        -webkit-user-drag: none;
+        /* Safari/Chrome */
+        user-select: none;
+        pointer-events: none;
+    }
+
+    .valorxquantidade form {
+        min-height: 44px;
+    }
+
+    .valor {
+        font-size: 2rem;
+        height: 44px;
+    }
+
 }
