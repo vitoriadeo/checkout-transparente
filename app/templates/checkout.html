@@ -41,9 +41,36 @@
         <input type="text" id="id" name="id" class="form-text">
     </div>
 
-    <div class="input-box">
-        <label for="postal">CEP</label>
-        <input type="text" id="postal" name="postal" class="form-text">
+    <div class="form-grid">
+        <div class="input-box-grid">
+            <label for="postal">CEP</label>
+            <input type="text" id="postal" name="postal" class="form-text">
+        </div>
+
+        <div class="input-box-grid">
+            <label for="numero">Número de residencia</label>
+            <input type="text" id="numero" name="numero" class="form-text">
+        </div>
+
+        <div class="input-box-grid readonly">
+            <label for="logradouro">Logradouro</label>
+            <input type="text" id="Logradouro" name="logradouro" class="form-text" readonly>
+        </div>
+
+        <div class="input-box-grid readonly">
+            <label for="bairro">Bairro</label>
+            <input type="text" id="bairro" name="bairro" class="form-text" readonly>
+        </div>
+
+        <div class="input-box-grid readonly">
+            <label for="cidade">Cidade</label>
+            <input type="text" id="cidade" name="cidade" class="form-text" readonly>
+        </div>
+
+        <div class="input-box-grid readonly">
+            <label for="estado">Estado</label>
+            <input type="text" id="estado" name="estado" class="form-text" readonly>
+        </div>
     </div>
 </form>
 {% endblock %}
