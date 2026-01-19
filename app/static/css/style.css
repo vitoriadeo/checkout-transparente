@@ -244,10 +244,37 @@ h2 {
 .pay-form input {
     width: 100%;
     box-sizing: border-box;
+    color: #3a3a3ace;
+}
+
+.form-label {
+    background-color: #83a7622f;
+    padding: 5px 5px;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 5px;
+}
+
+.input-box {
+    margin-bottom: 25px
 }
 
 .pay-form .readonly input {
     background-color: #c5c1b2;
+    color: #3a3a3ace;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #e8e6d9 inset !important;
+    -webkit-text-fill-color: #3a3a3ace !important;
+}
+
+input:focus {
+    outline: none;
+    border: 1px solid #4a7c59;
 }
 
 .cab {
