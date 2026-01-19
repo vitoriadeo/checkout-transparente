@@ -25,7 +25,8 @@
     </div>
 </blockquote>
 
-<form class="pay-form">
+<form method="POST" class="pay-form">
+    <h3 class="form-label">Dados pessoais</h3>
     <div class="input-box">
         <label for="name">Nome completo</label>
         <input type="text" id="name" name="name" class="form-text">
@@ -36,15 +37,21 @@
         <input type="text" id="email" name="email" class="form-text">
     </div>
 
-    <div class="input-box">
-        <label for="id">CPF ou CNPJ</label>
-        <input type="text" id="id" name="id" class="form-text">
-    </div>
-
     <div class="form-grid">
         <div class="input-box-grid">
-            <label for="postal">CEP</label>
-            <input type="text" id="postal" name="postal" class="form-text">
+            <label for="telefone">Celular ou Telefone</label>
+            <input type="text" id="telefone" name="telefone" class="form-text">
+        </div>
+
+        <div class="input-box-grid">
+            <label for="id">CPF ou CNPJ</label>
+            <input type="text" id="id" name="id" class="form-text">
+        </div>
+
+        <div class="input-box-grid">
+            <label for="cep">CEP</label>
+            <input type="text" id="cep" name="cep" value="" maxlength="9" onblur="pesquisacep(this.value);"
+                class="form-text">
         </div>
 
         <div class="input-box-grid">
@@ -54,7 +61,7 @@
 
         <div class="input-box-grid readonly">
             <label for="logradouro">Logradouro</label>
-            <input type="text" id="Logradouro" name="logradouro" class="form-text" readonly>
+            <input type="text" id="logradouro" name="logradouro" class="form-text" readonly>
         </div>
 
         <div class="input-box-grid readonly">
@@ -72,5 +79,7 @@
             <input type="text" id="estado" name="estado" class="form-text" readonly>
         </div>
     </div>
+
+    <h3 class="form-label">Dados para pagamento</h3>
 </form>
 {% endblock %}
