@@ -25,6 +25,7 @@ def clear_cart():
     flash("Sua cesta de compras está vazia", "info")
     return redirect(url_for("main.product"))
 
+"""
 @section.route("/pay", method=['POST'])
 def pay():
     dados_pessoais = {
@@ -35,7 +36,7 @@ def pay():
         "cep": request.form.get("cep"),
         "numComplemento": request.form.get("numero")
     }
-
+"""
 
 @section.route("/checkout")  # página /get
 def checkout():
