@@ -81,5 +81,64 @@
     </div>
 
     <h3 class="form-label">Dados para pagamento</h3>
+    <div class="payment-selector">
+        <label class="radio-card selected" id="lbl-card">
+            <input type="radio" name="payment_method" value="CREDIT_CARD" checked onclick="togglePayment('card')">
+            <span>💳 Cartão</span>
+        </label>
+        
+        <label class="radio-card" id="lbl-pix">
+            <input type="radio" name="payment_method" value="PIX" onclick="togglePayment('pix')">
+            <span>💠 Pix</span>
+        </label>
+        
+        <label class="radio-card" id="lbl-boleto">
+            <input type="radio" name="payment_method" value="BOLETO" onclick="togglePayment('boleto')">
+            <span>📄 Boleto</span>
+        </label>
+    </div>
+
+    <div id="payment-card" class="payment-section">
+        
+        <div class="input-box">
+            <label>Nome impresso no cartão</label>
+            <input type="text" id="cc_holder_name" class="form-text" placeholder="Como no cartão">
+        </div>
+
+        <div class="input-box">
+            <label>Número do cartão</label>
+            <input type="text" id="cc_number" class="form-text" placeholder="0000 0000 0000 0000">
+        </div>
+
+        <div class="form-grid">
+            <div class="input-box-grid">
+                <label>Validade (MM/AAAA)</label>
+                <input type="text" id="cc_expiry" class="form-text" placeholder="12/2030">
+            </div>
+
+            <div class="input-box-grid">
+                <label>CVV</label>
+                <input type="text" id="cc_ccv" class="form-text" placeholder="123">
+            </div>
+        </div>
+    </div>
+
+    <div id="payment-pix" class="payment-section" style="display: none;">
+        <div class="info-payment">
+            <p><strong>APROVAÇÃO IMEDIATA!</strong></p>
+            <p>Ao finalizar a compra, você receberá o QR Code para pagamento.</p>
+        </div>
+    </div>
+
+    <div id="payment-boleto" class="payment-section" style="display: none;">
+        <div class="info-payment">
+            <p><strong>ATENÇÃO AO PRAZO:</strong></p>
+            <p>O boleto pode levar até 3 dias úteis para compensar.</p>
+        </div>
+    </div>
+
+    <div class="submit-area">
+        <button type="submit" class="btn-finalizar">Confirmar pagamento</button>
+    </div>
 </form>
 {% endblock %}

@@ -25,6 +25,7 @@ blockquote {
     border-radius: 3px;
     padding: 10px;
     box-sizing: border-box;
+    border: 1px solid #3333334b;
 }
 
 h1 {
@@ -78,6 +79,7 @@ h2 {
     text-transform: uppercase;
     font-family: 'Alegreya';
     flex-wrap: nowrap;
+    cursor: pointer;
 }
 
 .descricao {
@@ -108,7 +110,7 @@ h2 {
 }
 
 #main {
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     padding: 0 15px;
     background-color: rgb(247, 240, 227);
@@ -120,14 +122,14 @@ h2 {
 
 #footer,
 #header {
-    width: 80%;
+    width: 90%;
     margin: 20px auto;
     text-align: center;
     max-width: 1200px;
 }
 
 .menu {
-    width: 80%;
+    width: 90%;
     margin: 20px auto;
     padding-bottom: 10px;
     text-align: center;
@@ -188,6 +190,7 @@ h2 {
     border: none;
     color: #fff8e1;
     padding: 5px 8px;
+    cursor: pointer;
 }
 
 .valor {
@@ -253,6 +256,7 @@ h2 {
     text-align: center;
     text-transform: uppercase;
     border-radius: 5px;
+    border: 1px solid #3333334b;
 }
 
 .input-box {
@@ -265,8 +269,8 @@ h2 {
 }
 
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px #e8e6d9 inset !important;
     -webkit-text-fill-color: #3a3a3ace !important;
@@ -286,6 +290,66 @@ input:focus {
     /* Safari/Chrome */
     user-select: none;
     pointer-events: none;
+}
+
+.payment-selector {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.radio-card {
+    flex: 1;
+    border: 1px solid #ccc;
+    background: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+}
+
+.radio-card input {
+    display: none;
+}
+
+.radio-card.selected {
+    background-color: #dcedc8;
+    border-color: #558b2f;
+    color: #2e5230;
+    font-weight: bold;
+}
+
+.info-payment {
+    background-color: #f1f8e9;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    color: #33691e;
+    border: 1px dashed #558b2f;
+}
+
+.submit-area {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.btn-finalizar {
+    background-color: #2e5230;
+    color: white;
+    padding: 10px 40px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 20px;
+    transition: 2s ease;
+}
+
+.btn-finalizar:hover {
+    background-color: #1b331d;
 }
 
 @media (min-width: 600px) {
