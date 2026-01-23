@@ -1,29 +1,18 @@
 import logging
 import os
 import requests
-import re
-from database.database_manager import get_db
-
+from database.client_repo import busca_cliente_db, cria_cliente_db
 
 logger = logging.getLogger(__name__)
 
 
 def cria_ou_consulta_cliente(dados_pessoais):
-    db = get_db()
-    cursor = db.cursor()
-
     try:
-        cpf_cnpj = dados_pessoais["cpfCnpj"]
+        id_asaas = busca_cliente_db(dados_pessoais['cpfCnpj'])
 
-        cursor.execute(
-            "select id_cliente_asaas from cliente where cpf_cnpj = %s", (cpf_cnpj,)
-        )
-        resultado = cursor.fetchone()
-
-        if resultado and resultado[0]:
-            id_cliente_asaas = resultado[0]
-            logging.info(f"ID existente: {id_cliente_asaas}")
-            return id_cliente_asaas
+        if id_asaas:
+            logger.info(f"Cliente Asaas identificado, ID: {id_asaas}")
+            return id_asaas
         else:
             url = "https://api-sandbox.asaas.com/v3/customers"
             headers = {
@@ -36,28 +25,13 @@ def cria_ou_consulta_cliente(dados_pessoais):
 
             if response.status_code == 200:
                 dados_asaas = response.json()
-                novo_id_asaas = dados_asaas["id"]
 
-                nome = dados_asaas["name"]
-                email = dados_asaas["email"]
-                cpfCnpj = dados_asaas["cpfCnpj"]
-                cep = dados_asaas["postalCode"]
-                num_residencia = dados_asaas["addressNumber"]
-                id_cliente_asaas = dados_asaas["id"]
-
-                cursor.execute(
-                    "insert into cliente (nome, email, cpf_cnpj, cep, num_residencia, id_cliente_asaas) values (%s, %s, %s, %s, %s, %s)", (nome, email, cpfCnpj, cep, num_residencia, id_cliente_asaas)
-                )
-                db.commit()
-
-                return novo_id_asaas
+                id_asaas = cria_cliente_db(dados_asaas)
+                return id_asaas
             else:
-                # Trate o erro (ex: CPF inválido)
-                return None
+                logger.warning(f"Status Code [{response.status_code}] - Problema ao retornar dados.")
+                response.raise_for_status()
 
     except Exception as e:
-        db.rollback()
-        logging.error(f"Ocorreu um erro. A transação foi desfeita: {e}")
+        logger.error(f"Ocorreu um erro no gerenciamento da API (para cadastro de cliente). A transação foi desfeita: {e}")
         raise e
-    finally:
-        cursor.close()
