@@ -1,6 +1,11 @@
 from flask import Blueprint, render_template, flash, redirect, url_for, session, request
+import logging
+from requests.exceptions import HTTPError
+from ..services.asaas_service import cria_ou_consulta_cliente
+
 
 section = Blueprint("main", __name__)
+logger = logging.getLogger(__name__)
 
 
 @section.route("/product")  # página /get
@@ -25,23 +30,49 @@ def clear_cart():
     flash("Sua cesta de compras está vazia", "info")
     return redirect(url_for("main.product"))
 
-"""
-@section.route("/pay", method=['POST'])
+
+@section.route("/pay", methods=["POST"])
 def pay():
     dados_pessoais = {
-        "nome": request.form.get("nome"),
+        "name": request.form.get("nome"),
         "email": request.form.get("email"),
         "cpfCnpj": request.form.get("id"),
-        "telefone": request.form.get("telefone"),
-        "cep": request.form.get("cep"),
-        "numComplemento": request.form.get("numero")
+        "mobilePhone": request.form.get("telefone"),
+        "postalCode": request.form.get("cep"),
+        "addressNumber": request.form.get("numero"),
     }
-"""
+
+    try:
+        customer_id = cria_ou_consulta_cliente(dados_pessoais)
+
+        payment_method = request.form.get("payment_method")
+
+        if payment_method == 'CREDIT':
+            pass
+        elif payment_method == 'PIX':
+            pass
+        elif payment_method == 'BOLETO':
+            pass
+        else:
+            logger.info(f"Forma de pagamento diferente do esperado. {payment_method}")
+            flash("Houve um problema com a forma de pagamento. Verifique e tente novamente.", "error")
+            return redirect(url_for('main.checkout'))
+
+    except HTTPError as e:
+        logger.warning(f"Erro 401 ou 400 - response Asaas")
+        flash("Houve um problema com os dados do pagamento. Verifique e tente novamente.", "error")
+        return redirect(url_for('main.checkout'))
+    
+    except Exception as e:
+        logger.error(f"Erro interno não esperado: {e}")
+        flash("Erro interno do servidor. Tente mais tarde.", "error")
+        return redirect(url_for('main.checkout'))
+
 
 @section.route("/checkout")  # página /get
 def checkout():
-    if 'preco' not in session:
-        return redirect(url_for('main.product'))
+    if "preco" not in session:
+        return redirect(url_for("main.product"))
     return render_template("checkout.html")
 
 
