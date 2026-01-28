@@ -1,7 +1,11 @@
 from flask import Blueprint, render_template, flash, redirect, url_for, session, request
 import logging
+import os
+import requests
 from requests.exceptions import HTTPError
 from ..services.asaas_service import cria_ou_consulta_cliente
+from ..services.cobranca import *
+from datetime import date
 
 
 section = Blueprint("main", __name__)
@@ -18,8 +22,10 @@ def add_cart():
     preco = request.form.get("preco")
     quantidade = request.form.get("quantidade")
 
-    session["preco"] = preco
-    session["quantidade"] = quantidade
+    session["preco"] = float(preco)
+    session["quantidade"] = int(quantidade)
+
+    session["valor_total"] = session["preco"] * session["quantidade"]
 
     return redirect(url_for("main.checkout"))
 
@@ -42,31 +48,72 @@ def pay():
         "addressNumber": request.form.get("numero"),
     }
 
+    valor_total = session.get("valor_total")
+
     try:
         customer_id = cria_ou_consulta_cliente(dados_pessoais)
 
         payment_method = request.form.get("payment_method")
 
-        if payment_method == 'CREDIT':
-            pass
-        elif payment_method == 'PIX':
-            pass
-        elif payment_method == 'BOLETO':
-            pass
+        if payment_method == "PIX":
+            payload = {
+                "customer": customer_id,
+                "billingType": payment_method,
+                "value": valor_total,
+                "dueDate": date.today().isoformat(),
+            }
+
+            resposta_pagamento = cria_cobranca(payload)
+
+            id_cobranca = resposta_pagamento["id"]
+            qr_code_data = busca_qrcode_pix(id_cobranca)
+
+            if qr_code_data:
+                return render_template(
+                    "billing/pix.html",
+                    qr_code=qr_code_data["encodedImage"],
+                    copia_cola=qr_code_data["payload"],
+                )
+            else:
+                flash("Houve um problema na geração do código CR Code. Por favor, tente novamente.", "error")
+                return redirect(url_for("main.checkout"))
+
+
+        elif payment_method == "BOLETO":
+            payload = {
+                "customer": customer_id,
+                "billingType": payment_method,
+                "value": valor_total,
+                "dueDate": date.today().isoformat(),
+            }
+
+            resposta_pagamento = cria_cobranca(payload)
+
+
+            return render_template(
+                "billing/boleto.html", link_boleto=resposta_pagamento["bankSlipUrl"]
+            )
+
         else:
             logger.info(f"Forma de pagamento diferente do esperado. {payment_method}")
-            flash("Houve um problema com a forma de pagamento. Verifique e tente novamente.", "error")
-            return redirect(url_for('main.checkout'))
+            flash(
+                "Houve um problema com a forma de pagamento. Verifique e tente novamente.",
+                "error",
+            )
+            return redirect(url_for("main.checkout"))
 
     except HTTPError as e:
         logger.warning(f"Erro 401 ou 400 - response Asaas")
-        flash("Houve um problema com os dados do pagamento. Verifique e tente novamente.", "error")
-        return redirect(url_for('main.checkout'))
-    
+        flash(
+            "Houve um problema com os dados do pagamento. Verifique e tente novamente.",
+            "error",
+        )
+        return redirect(url_for("main.checkout"))
+
     except Exception as e:
         logger.error(f"Erro interno não esperado: {e}")
         flash("Erro interno do servidor. Tente mais tarde.", "error")
-        return redirect(url_for('main.checkout'))
+        return redirect(url_for("main.checkout"))
 
 
 @section.route("/checkout")  # página /get
