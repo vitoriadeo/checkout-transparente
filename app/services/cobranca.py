@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 def cria_cobranca(payload):
     try:
-        url = 'https://api-sandbox.asaas.com/v3/lean/payments'
+        url = 'https://api-sandbox.asaas.com/v3/payments'
         headers = {
             "content-type": "application/json",
             "accept": "application/json",
