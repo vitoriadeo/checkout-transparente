@@ -174,7 +174,17 @@ h2 {
     border-radius: 5px;
     font-family: 'Alegreya';
     text-align: center;
-    margin-bottom: 15px;
+    margin: 15px 0 15px 0;
+}
+
+.error {
+    background-color: #ff4b4bdc;
+    color: rgb(255, 255, 255);
+    padding: 1px 15px;
+    border-radius: 5px;
+    font-family: 'Alegreya';
+    text-align: center;
+    margin: 15px 0 15px 0;
 }
 
 .botoes-carrinho {
