@@ -11,8 +11,7 @@
         {% else %}
         <b>repolho</b>
         {% endif %}
-        por <b>R$ {{ (session['preco']|float *
-            session['quantidade']|int)|round(2) }}</b><br>
+        por <b>R$ {{ session['valor_total'] }}</b><br>
         <div class="botoes-carrinho">
             <form action="/clear-cart" method="POST">
                 <button>Limpar carrinho</button>
