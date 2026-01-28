@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %} {{super()}} - Pagamento via Boleto {% endblock %}
+
+{% block content %}
+<a href="{{ link_boleto }}" target="_blank" class="btn btn-primary">
+    Baixar Boleto PDF
+</a>
+{% endblock %}

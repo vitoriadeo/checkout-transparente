@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %} {{super()}} - Pagamento via PIX {% endblock %}
+
+{% block content %}
+<img src="data:image/png;base64, {{ qr_code }}" alt="QR Code Pix" />
+
+<p>Ou copie e cole:</p>
+<textarea readonly>{{ copia_cola }}</textarea>
+{% endblock %}
