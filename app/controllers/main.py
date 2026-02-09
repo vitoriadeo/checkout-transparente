@@ -69,15 +69,20 @@ def pay():
             qr_code_data = busca_qrcode_pix(id_cobranca)
 
             if qr_code_data:
-                return render_template(
-                    "billing/pix.html",
-                    qr_code=qr_code_data["encodedImage"],
-                    copia_cola=qr_code_data["payload"],
-                )
-            else:
-                flash("Houve um problema na geração do código CR Code. Por favor, tente novamente.", "error")
-                return redirect(url_for("main.checkout"))
 
+                session["dados_pix"] = {
+                    "qr_code": qr_code_data["encodedImage"],
+                    "copia_cola": qr_code_data["payload"],
+                }
+
+                return redirect(url_for("main.pix"))
+
+            else:
+                flash(
+                    "Houve um problema na geração do código CR Code. Por favor, tente novamente.",
+                    "error",
+                )
+                return redirect(url_for("main.checkout"))
 
         elif payment_method == "BOLETO":
             payload = {
@@ -89,10 +94,15 @@ def pay():
 
             resposta_pagamento = cria_cobranca(payload)
 
+            print(resposta_pagamento)
 
-            return render_template(
-                "billing/boleto.html", link_boleto=resposta_pagamento["bankSlipUrl"]
-            )
+            session["dados_boleto"] = {
+                "link": resposta_pagamento["bankSlipUrl"],
+                "vencimento": resposta_pagamento["dueDate"],
+                "valor": resposta_pagamento["value"],
+            }
+
+            return redirect(url_for("main.boleto"))
 
         else:
             logger.info(f"Forma de pagamento diferente do esperado. {payment_method}")
@@ -114,6 +124,26 @@ def pay():
         logger.error(f"Erro interno não esperado: {e}")
         flash("Erro interno do servidor. Tente mais tarde.", "error")
         return redirect(url_for("main.checkout"))
+
+
+@section.route("/pay/pix", methods=["GET"])
+def pix():
+    dados = session.get("dados_pix")
+
+    if not dados:
+        return redirect(url_for("main.checkout"))
+
+    return render_template("billing/pix.html", dados=dados)
+
+
+@section.route("/pay/boleto", methods=["GET"])
+def boleto():
+    dados = session.get("dados_boleto")
+
+    if not dados:
+        return redirect(url_for("main.checkout"))
+
+    return render_template("billing/boleto.html", dados=dados)
 
 
 @section.route("/checkout")  # página /get
