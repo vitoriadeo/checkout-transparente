@@ -82,9 +82,10 @@
     <h3 class="form-label">Dados para pagamento</h3>
 
     <div class="about-payment">
-        <p>O Reino da Terra aceita transferências via <b>PIX</b> ou <b>boleto bancário</b><br> (Não aceitamos pagamentos da
+        <p>O Reino da Terra aceita transferências via <b>PIX</b> ou <b>boleto bancário</b><br> (Não aceitamos pagamentos
+            da
             Nação do Fogo)</p>
-            <div class="valor-final">R$ {{ session['valor_total'] }}</div>
+        <div class="valor-final">R$ {{ session['valor_total'] }}</div>
     </div>
 
     <div class="payment-selector">
@@ -102,14 +103,14 @@
     <div id="payment-pix" class="payment-section" style="display: none;">
         <div class="info-payment">
             <p><strong>APROVAÇÃO IMEDIATA!</strong></p>
-            <p>Ao finalizar a compra, você receberá o QR Code para pagamento.</p>
+            <p>Finalize agora e receba o QR Code. Nossos falcões mensageiros estão prontos!</p>
         </div>
     </div>
 
     <div id="payment-boleto" class="payment-section" style="display: none;">
         <div class="info-payment">
             <p><strong>ATENÇÃO AO PRAZO:</strong></p>
-            <p>O boleto pode levar até 3 dias úteis para compensar.</p>
+            <p>Assim como uma boa colheita, isso leva tempo. A compensação pode demorar até 3 dias úteis.</p>
         </div>
     </div>
 
