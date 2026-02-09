@@ -2,7 +2,17 @@
 {% block title %} {{super()}} - Pagamento via Boleto {% endblock %}
 
 {% block content %}
-<a href="{{ link_boleto }}" target="_blank" class="btn btn-primary">
-    Baixar Boleto PDF
+<h3>Boleto Gerado com Sucesso!</h3>
+
+<p>Valor: R$ {{ dados.valor }} - Vencimento: {{ dados.vencimento }}</p>
+
+<a href="{{ dados.link }}" target="_blank" class="btn btn-primary">
+    📄 Baixar/Imprimir Boleto
 </a>
+
+<hr>
+
+<p class="aviso-compensacao">
+    ⚠️ O pagamento via boleto pode levar até <strong>3 dias úteis</strong> para ser confirmado.
+</p>
 {% endblock %}
