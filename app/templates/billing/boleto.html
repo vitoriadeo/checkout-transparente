@@ -2,17 +2,28 @@
 {% block title %} {{super()}} - Pagamento via Boleto {% endblock %}
 
 {% block content %}
-<h3>Boleto Gerado com Sucesso!</h3>
+<h3>Boleto gerado com sucesso!</h3>
 
-<p>Valor: R$ {{ dados.valor }} - Vencimento: {{ dados.vencimento }}</p>
+<div class="lbl-boleto">
+    <p>Valor: R$ {{ dados.valor }} </p>
+    <p> Vencimento: {{ dados.vencimento }}</p>
+</div>
 
-<a href="{{ dados.link }}" target="_blank" class="btn btn-primary">
-    📄 Baixar/Imprimir Boleto
+<a href="{{ dados.link }}" target="_blank" class="btn imprimir">
+    Baixar/Imprimir Boleto
 </a>
 
+<div class="aviso">
+    <strong>MODO DE SIMULAÇÃO (SANDBOX) | NÃO PAGUE ESTE BOLETO</strong>
+</div>
+<p>
+    Este sistema foi desenvolvido exclusivamente para <strong>fins de estudo</strong>.
+    O boleto gerado é um teste e não possui valor comercial real.
+</p>
 <hr>
 
-<p class="aviso-compensacao">
-    ⚠️ O pagamento via boleto pode levar até <strong>3 dias úteis</strong> para ser confirmado.
+<em>A Cabbage Corp informa: Nenhuma moeda de ouro, prata ou cobre será debitada da sua conta real. Guarde seu
+    dinheiro para repolhos de verdade!</em>
+
 </p>
 {% endblock %}
