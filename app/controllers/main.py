@@ -1,12 +1,7 @@
 from flask import Blueprint, render_template, flash, redirect, url_for, session, request
 import logging
-import os
-import requests
-from requests.exceptions import HTTPError
-from ..services.asaas_service import cria_ou_consulta_cliente
 from ..services.cobranca import *
-from datetime import date
-
+from ..services import checkout_service
 
 section = Blueprint("main", __name__)
 logger = logging.getLogger(__name__)
@@ -39,91 +34,19 @@ def clear_cart():
 
 @section.route("/pay", methods=["POST"])
 def pay():
-    dados_pessoais = {
-        "name": request.form.get("nome"),
-        "email": request.form.get("email"),
-        "cpfCnpj": request.form.get("id"),
-        "mobilePhone": request.form.get("telefone"),
-        "postalCode": request.form.get("cep"),
-        "addressNumber": request.form.get("numero"),
-    }
-
+    dados_formulario = request.form.to_dict()
     valor_total = session.get("valor_total")
 
-    try:
-        customer_id = cria_ou_consulta_cliente(dados_pessoais)
+    resultado = checkout_service.processar_pagamento(dados_formulario, valor_total)
 
-        payment_method = request.form.get("payment_method")
-
-        if payment_method == "PIX":
-            payload = {
-                "customer": customer_id,
-                "billingType": payment_method,
-                "value": valor_total,
-                "dueDate": date.today().isoformat(),
-            }
-
-            resposta_pagamento = cria_cobranca(payload)
-
-            id_cobranca = resposta_pagamento["id"]
-            qr_code_data = busca_qrcode_pix(id_cobranca)
-
-            if qr_code_data:
-
-                session["dados_pix"] = {
-                    "qr_code": qr_code_data["encodedImage"],
-                    "copia_cola": qr_code_data["payload"],
-                }
-
-                return redirect(url_for("main.pix"))
-
-            else:
-                flash(
-                    "Houve um problema na geração do código CR Code. Por favor, tente novamente.",
-                    "error",
-                )
-                return redirect(url_for("main.checkout"))
-
-        elif payment_method == "BOLETO":
-            payload = {
-                "customer": customer_id,
-                "billingType": payment_method,
-                "value": valor_total,
-                "dueDate": date.today().isoformat(),
-            }
-
-            resposta_pagamento = cria_cobranca(payload)
-
-            print(resposta_pagamento)
-
-            session["dados_boleto"] = {
-                "link": resposta_pagamento["bankSlipUrl"],
-                "vencimento": resposta_pagamento["dueDate"],
-                "valor": resposta_pagamento["value"],
-            }
-
-            return redirect(url_for("main.boleto"))
-
-        else:
-            logger.info(f"Forma de pagamento diferente do esperado. {payment_method}")
-            flash(
-                "Houve um problema com a forma de pagamento. Verifique e tente novamente.",
-                "error",
-            )
-            return redirect(url_for("main.checkout"))
-
-    except HTTPError as e:
-        logger.warning(f"Erro 401 ou 400 - response Asaas")
-        flash(
-            "Houve um problema com os dados do pagamento. Verifique e tente novamente.",
-            "error",
-        )
+    if not resultado["sucesso"]:
+        flash(resultado["erro"], "error")
         return redirect(url_for("main.checkout"))
 
-    except Exception as e:
-        logger.error(f"Erro interno não esperado: {e}")
-        flash("Erro interno do servidor. Tente mais tarde.", "error")
-        return redirect(url_for("main.checkout"))
+    tipo = resultado["tipo"]
+    session[f"dados_{tipo}"] = resultado["dados"]
+    
+    return redirect(url_for(f"main.{tipo}"))
 
 
 @section.route("/pay/pix", methods=["GET"])
