@@ -11,7 +11,7 @@ def cria_ou_consulta_cliente(dados_pessoais):
         id_asaas = busca_cliente_db(dados_pessoais['cpfCnpj'])
 
         if id_asaas:
-            logger.info(f"Cliente Asaas identificado, ID: {id_asaas}")
+            logger.info(f"Cliente Asaas identificado")
             return id_asaas
         else:
             url = "https://api-sandbox.asaas.com/v3/customers"

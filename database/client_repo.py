@@ -19,7 +19,7 @@ def busca_cliente_db(cpf):
         # de tupla para string
         if id_asaas and id_asaas[0]: 
             id_asaas = id_asaas[0] 
-            logger.info(f"ID existente: {id_asaas}")
+            logger.info(f"ID existente")
             return id_asaas
     
     except Exception as e:
