@@ -67,7 +67,7 @@ h2 {
     vertical-align: middle;
 }
 
-.button {
+.btn-comprar {
     background-color: rgb(124, 82, 58);
     border: none;
     padding: 5px 10px;
@@ -363,6 +363,18 @@ input:focus {
     transition: 2s ease;
 }
 
+.lbl-boleto {
+    background-color: #4141412c;
+    display: flex;
+    justify-content: space-around;
+    border-radius: 5px;
+    text-transform: uppercase;
+}
+
+.btn-imprimir {
+    
+}
+
 .btn-finalizar:hover {
     background-color: #1b331d;
 }
@@ -392,7 +404,7 @@ input:focus {
         margin-right: 15px;
     }
 
-    .button {
+    .btn-comprar {
         width: 200px;
         height: 44px;
     }
