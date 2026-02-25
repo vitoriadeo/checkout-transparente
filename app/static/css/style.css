@@ -187,6 +187,28 @@ h2 {
     margin: 15px 0 15px 0;
 }
 
+.att-label {
+    border: 1px dashed #41414196;
+    background-color: #41414118;
+    color: rgb(56, 56, 56);
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-family: 'Alegreya';
+    text-align: center;
+    margin: 15px 0 15px 0;
+    font-weight: bolder;
+}
+
+.att-label span {
+    font-weight: normal;
+}
+
+.lbl-obs {
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
 .botoes-carrinho {
     display: flex;
     gap: 10px;
@@ -269,14 +291,18 @@ h2 {
     border: 1px solid #3333334b;
 }
 
+.main-ttl {
+    padding: 5px 5px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
 .input-box {
     margin-bottom: 25px
 }
 
 .valor-final {
-    font-size: 2rem;
-    background-color: #2c2c2c36;
-    display: inline-block;
+    font-size: 1.5rem;
     color: #3a3a3a;
     padding: 5px 10px;
     border-radius: 5px;
@@ -315,8 +341,8 @@ input:focus {
 
 .radio-card {
     flex: 1;
-    border: 1px solid #ccc;
-    background: #fff;
+    border: 1px solid #83a76265;
+    background: #83a7622f;
     padding: 15px;
     border-radius: 5px;
     text-align: center;
@@ -363,16 +389,30 @@ input:focus {
     transition: 2s ease;
 }
 
+.link-boleto-imprimir {
+    background-color: #2e523083;
+    padding: 10px 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    width: 100%;
+    margin: 15px 0;
+    transition: 2s ease;
+    text-align: center;
+}
+
+.link-boleto-imprimir a {
+    text-align: center;
+    color: #fff;
+}
+
 .lbl-boleto {
     background-color: #4141412c;
     display: flex;
     justify-content: space-around;
     border-radius: 5px;
     text-transform: uppercase;
-}
-
-.btn-imprimir {
-    
 }
 
 .btn-finalizar:hover {
